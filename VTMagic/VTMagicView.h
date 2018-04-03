@@ -288,6 +288,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong, nullable) UIColor *navigationColor;
 
 /**
+ *  顶部导航栏背景图
+ */
+@property (nonatomic, strong, nullable) UIImage *navigationBackgroundImage;
+
+/**
  *  顶部导航条的高度，默认是44
  */
 @property (nonatomic, assign) CGFloat navigationHeight;

@@ -43,6 +43,7 @@ static const void *kVTMagicView = &kVTMagicView;
 @property (nonatomic, strong) VTContentView *contentView; // 容器视图
 @property (nonatomic, strong) UIView *sliderView; // 顶部导航栏滑块
 @property (nonatomic, strong) UIView *separatorView; // 导航模块底部分割线
+@property (nonatomic, strong) UIImageView *backgroundImageView; // 导航栏背景图
 @property (nonatomic, strong) NSArray *menuTitles; // 顶部分类名数组
 @property (nonatomic, assign) NSInteger nextPageIndex; // 下一个页面的索引
 @property (nonatomic, assign) NSInteger currentPage; //当前页面的索引
@@ -80,6 +81,7 @@ static const void *kVTMagicView = &kVTMagicView;
     [self addSubview:self.contentView];
     [self addSubview:self.navigationView];
     [self addSubview:self.headerView];
+    [_navigationView addSubview:self.backgroundImageView];
     [_navigationView addSubview:self.separatorView];
     [_navigationView addSubview:self.menuBar];
     [_menuBar addSubview:self.sliderView];
@@ -124,6 +126,8 @@ static const void *kVTMagicView = &kVTMagicView;
     CGFloat navigationY = _headerHidden ? 0 : CGRectGetMaxY(_headerView.frame);
     CGFloat navigationH = _navigationHeight + (_headerHidden ? topY : 0);
     _navigationView.frame = CGRectMake(0, navigationY, size.width, navigationH);
+    
+    _backgroundImageView.frame = CGRectMake(0, 0, size.width, navigationH);
     
     CGFloat separatorY = CGRectGetHeight(_navigationView.frame) - _separatorHeight;
     _separatorView.frame = CGRectMake(0, separatorY, size.width, _separatorHeight);
@@ -898,6 +902,14 @@ static VTPanRecognizerDirection direction = VTPanRecognizerDirectionUndefined;
     return _navigationView;
 }
 
+- (UIImageView *)backgroundImageView {
+    if (!_backgroundImageView) {
+        _backgroundImageView = [[UIImageView alloc] init];
+        _backgroundImageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    }
+    return _backgroundImageView;
+}
+
 - (UIView *)separatorView {
     if (!_separatorView) {
         _separatorView = [[UIView alloc] init];
@@ -1115,6 +1127,11 @@ static VTPanRecognizerDirection direction = VTPanRecognizerDirectionUndefined;
 - (void)setNavigationInset:(UIEdgeInsets)navigationInset {
     _navigationInset = navigationInset;
     _menuBar.menuInset = navigationInset;
+}
+
+- (void)setNavigationBackgroundImage:(UIImage *)navigationBackgroundImage {
+    _navigationBackgroundImage = navigationBackgroundImage;
+    _backgroundImageView.image = navigationBackgroundImage;
 }
 
 - (void)setNavigationColor:(UIColor *)navigationColor {
