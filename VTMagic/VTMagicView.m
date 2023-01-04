@@ -597,9 +597,9 @@ static VTPanRecognizerDirection direction = VTPanRecognizerDirectionUndefined;
     UIColor *nextColor = [UIColor vtm_compositeColor:_normalVTColor anoColor:_selectedVTColor scale:absScale];
     UIColor *selectedColor = [UIColor vtm_compositeColor:_selectedVTColor anoColor:_normalVTColor scale:absScale];
     UIButton *currentItem = [_menuBar itemAtIndex:_currentPage];
-    [currentItem setTitleColor:selectedColor forState:UIControlStateSelected];
+    [currentItem setTitleColor:_selectedColor forState:UIControlStateSelected];
     UIButton *nextItem = [_menuBar itemAtIndex:_nextPageIndex];
-    [nextItem setTitleColor:nextColor forState:UIControlStateNormal];
+    [nextItem setTitleColor:_normalColor forState:UIControlStateNormal];
     
     CGRect nextFrame  = [_menuBar sliderFrameAtIndex:_nextPageIndex];
     CGRect currentFrame = [_menuBar sliderFrameAtIndex:_currentPage];
